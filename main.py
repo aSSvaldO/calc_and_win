@@ -1,26 +1,44 @@
-from module import run_game
+class Bird:
+    def __init__(self, name, size):
+        self.name = name
+        self.size = size
 
-INTRO = '''РАССЧИТАЙ И ПОБЕДИ!
-Загрузка...
+    def describe(self, full=False):
+        return f'Размер птицы {self.name} — {self.size}.'
 
-Твоя цель — за 5 ходов набрать такое количество очков урона противнику,
-которое попадет в диапазон +– 10 от значения здоровья противника.
 
-Значение здоровья противника генерируется случайным образом
-в диапазоне от 80 до 120 очков.
+class Parrot(Bird):
+    def __init__(self, name, size, color):
+        super().__init__(name, size)
+        self.color = color
 
-В твоём распоряжении три вида атак:
-lite — урон от 2 до 5 очков;
-mid — урон от 15 до 25 очков;
-hard — урон от 30 до 40 очков.
-ВПЕРЁД К ПОБЕДЕ!!!
-'''
+    def describe(self, full=False):
+        if full is False:
+            return super().describe()
+        return (f'Попугай name — заметная птица, окрас её перьев — {self.color}, '
+                f'а размер — {self.size}. Интересный факт: попугаи чувствуют ритм, '
+                f'а вовсе не бездумно двигаются под музыку. Если сменить композицию, '
+                f'то и темп движений птицы изменится.')
 
-def main():
-    print(INTRO)
-    replay = True
-    while replay:
-        replay = run_game()
 
-if __name__ == '__main__':
-    main()
+class Penguin(Bird):
+    def __init__(self, name, size, genus):
+        super().__init__(name, size)
+        self.genus = genus
+
+    def describe(self, full=False):
+        if full is False:
+            return super().describe()
+        return (f'Размер пингвина {self.name} из рода {self.genus} — {self.size}. '
+                f'Интересный факт: однажды группа геологов-разведчиков '
+                f'похитила пингвинье яйцо, и их принялась преследовать вся стая, '
+                f'не пытаясь, впрочем, при этом нападать. Посовещавшись, похитители '
+                f'вернули птицам яйцо, и те отстали.')
+
+
+kesha = Parrot('Ара', 'средний', 'красный')
+kowalski = Penguin('Королевский', 'большой', 'Aptenodytes')
+
+# Вызов метода у созданных объектов.
+kesha.describe()
+kowalski.describe(True)
